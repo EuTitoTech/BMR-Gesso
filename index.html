@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMR Gesso | Acabamentos de Alto Padrão</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --gold: #C5A059;
+            --gold-glow: rgba(197, 160, 89, 0.3);
+            --black-deep: #0a0a0a;
+            --surface: #141414;
+            --surface-hover: #1f1f1f;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --whatsapp: #25D366;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Manrope', sans-serif; }
+
+        body {
+            background-color: var(--black-deep);
+            background-image: radial-gradient(circle at top center, #1a1a1a, var(--black-deep)), url('fundo-gesso.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-blend-mode: overlay;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            
+            /* --- PROTEÇÃO ANTI-SELEÇÃO (CSS) --- */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Padrão */
+        }
+
+        /* Impede arrastar imagens */
+        img, video {
+            pointer-events: none; 
+            -webkit-user-drag: none;
+        }
+
+        /* Permite clicar em links e botões, mas não selecionar o texto */
+        a, button, .big-cta, .service-card {
+            pointer-events: auto;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            padding: 50px 20px 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header { text-align: center; margin-bottom: 50px; max-width: 600px; position: relative; }
+
+        .profile-wrapper {
+            position: relative;
+            width: 125px; height: 125px;
+            margin: 0 auto 15px;
+        }
+
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            padding: 3px;
+            background: var(--surface);
+            box-shadow: 0 0 30px var(--gold-glow);
+            transition: var(--transition);
+        }
+        
+        .profile-wrapper:hover .profile-img { transform: scale(1.05); border-color: #fff; }
+
+        .verified-badge {
+            position: absolute; bottom: 5px; right: 5px;
+            background: #1DA1F2; color: #fff;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; border: 2px solid var(--black-deep);
+        }
+
+        h1 {
+            font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 5px;
+            background: linear-gradient(to bottom right, #fff, #bbb);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 15px; letter-spacing: 2px; }
+
+        .bio-text {
+            color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;
+            max-width: 400px; margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex; align-items: center; gap: 20px;
+            position: relative; overflow: hidden;
+        }
+
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(197, 160, 89, 0.05), transparent);
+            transform: translateX(-100%); transition: 0.5s;
+        }
+        .service-card:hover::before { transform: translateX(100%); }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background: rgba(30, 30, 30, 0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .icon-box {
+            width: 50px; height: 50px;
+            background: rgba(197, 160, 89, 0.1);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .card-info h3 { color: var(--text-main); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+        .card-info p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.3; }
+        
+        .arrow-indicator { margin-left: auto; color: var(--gold); opacity: 0; transform: translateX(-10px); transition: var(--transition); }
+        .service-card:hover .arrow-indicator { opacity: 1; transform: translateX(0); }
+
+        .video-section { width: 100%; margin-bottom: 50px; }
+        
+        .section-header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;
+        }
+        .section-header h2 { font-size: 1.3rem; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .section-header span { font-size: 0.8rem; color: var(--gold); font-weight: 600; text-transform: uppercase; }
+
+        .video-grid {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+        }
+
+        .video-item {
+            width: 280px;
+            aspect-ratio: 9/16;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            transition: var(--transition);
+        }
+
+        .video-item:hover { transform: scale(1.02); border-color: var(--gold); }
+        .video-item video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .video-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            pointer-events: none;
+        }
+
+        .video-tag {
+            background: var(--gold); color: #000;
+            padding: 4px 10px; border-radius: 4px;
+            font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+            align-self: flex-start; margin-bottom: 5px;
+        }
+
+        .video-title { color: #fff; font-weight: 700; font-size: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+
+        .big-cta {
+            width: 100%; max-width: 500px;
+            background: linear-gradient(135deg, #25D366, #109686);
+            color: white; padding: 20px; border-radius: 50px;
+            text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 12px;
+            font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.5px;
+            box-shadow: 0 4px 25px rgba(37, 211, 102, 0.25);
+            transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .big-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(37, 211, 102, 0.5); }
+        
+        .big-cta::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        footer { margin-top: 40px; text-align: center; }
+        .footer-text { font-size: 0.85rem; color: #555; }
+        .dev-credit { color: var(--gold); text-decoration: none; font-weight: 600; opacity: 0.7; transition: 0.3s; font-size: 0.8rem; }
+        .dev-credit:hover { opacity: 1; text-decoration: underline; }
+
+        .fab-whatsapp {
+            position: fixed; bottom: 25px; right: 25px;
+            width: 60px; height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 30px; color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse-green 2s infinite;
+            text-decoration: none;
+            pointer-events: auto; /* Garante clique mesmo com bloqueio geral */
+        }
+        .fab-whatsapp:hover { transform: scale(1.1); }
+
+        @media (max-width: 768px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { padding: 20px; }
+            .arrow-indicator { display: none; }
+            
+            .video-grid { 
+                justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; 
+                padding-bottom: 15px; scroll-snap-type: x mandatory;
+            }
+            .video-item { min-width: 80%; scroll-snap-align: center; margin-right: 10px; }
+            .fab-whatsapp { bottom: 20px; right: 20px; width: 55px; height: 55px; }
+        }
+
+        @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+    </style>
+</head>
+<body oncontextmenu="return false">
+
+    <div class="main-wrapper">
+        
+        <header>
+            <div class="profile-wrapper">
+                <img src="perfil.jpg" alt="BMR Gesso" class="profile-img">
+                <div class="verified-badge"><i class="fas fa-check"></i></div>
+            </div>
+            <h1>BMR Gesso</h1>
+            
+            <div class="stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            
+            <p class="bio-text">
+                Especialista em Drywall e Iluminação. Transformamos projetos em realidade com acabamento de luxo e entrega pontual.
+            </p>
+        </header>
+
+        <div class="services-grid">
+            
+            <a href="https://wa.me/5531993273656?text=Olá!%20Gostaria%20de%20saber%20sobre%20*Rebaixamento%20de%20Teto*." class="service-card">
+                <div class="icon-box"><i class="fas fa-home"></i></div>
+                <div class="card-info">
+                    <h3>Rebaixamento Premium</h3>
+                    <p>Design moderno com tabica e estrutura reforçada.</p>
+                </div>
+                <i class="fas fa-chevron-right arrow-indicator"></i>
+            </a>
+
+            <a href="https://wa.me/5531993273656?text=Olá!%20Preciso%20de%20um%20orçamento%20para%20*Divisórias%20Drywall*." class="service-card">
+                <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+                <div class="card-info">
+                    <h3>Divisórias Drywall</h3>
+                    <p>Soluções acústicas rápidas para ambientes.</p>
+                </div>
+                <i class="fas fa-chevron-right arrow-indicator"></i>
+            </a>
+
+            <a href="https://wa.me/5531993273656?text=Olá!%20Quero%20fazer%20*Decoração%20com%20Sancas*." class="service-card">
+                <div class="icon-box"><i class="fas fa-lightbulb"></i></div>
+                <div class="card-info">
+                    <h3>Iluminação & Decor</h3>
+                    <p>Sancas, ilhas e projetos luminotécnicos.</p>
+                </div>
+                <i class="fas fa-chevron-right arrow-indicator"></i>
+            </a>
+
+        </div>
+
+        <div class="video-section">
+            <div class="section-header">
+                <h2><i class="fas fa-play-circle" style="color:var(--gold);"></i> Portfólio</h2>
+                <span>Resultados Reais</span>
+            </div>
+            
+            <div class="video-grid">
+                <div class="video-item">
+                    <video src="video1.mp4" autoplay loop muted playsinline></video>
+                    <div class="video-overlay">
+                        <span class="video-tag">Finalizado</span>
+                        <span class="video-title">Acabamento na Sala</span>
+                    </div>
+                </div>
+                
+                <div class="video-item">
+                    <video src="video2.mp4" autoplay loop muted playsinline></video>
+                    <div class="video-overlay">
+                        <span class="video-tag">Finalizado</span>
+                        <span class="video-title">Estrutura Reforçada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://wa.me/5531993273656?text=Olá!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20agendar%20uma%20visita." class="big-cta">
+            <i class="fab fa-whatsapp"></i> Agendar Visita Grátis
+        </a>
+
+        <footer>
+            <p class="footer-text">© 2026 BMR Gesso • Todos os direitos reservados.</p>
+            <a href="https://instagram.com/eutito.tech" target="_blank" class="dev-credit">Desenvolvido por @eutito.tech</a>
+        </footer>
+
+    </div>
+
+    <a href="https://wa.me/5531993273656?text=Olá!%20Preciso%20de%20atendimento." class="fab-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Bloqueia Botão Direito
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Bloqueia Atalhos de Teclado (F12, Ctrl+U, Ctrl+C, etc)
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) { // F12
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { // Ctrl+Shift+J
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U (Ver Código Fonte)
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { // Ctrl+S (Salvar Site)
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'C'.charCodeAt(0)) { // Ctrl+C (Copiar)
+                return false;
+            }
+        }
+
+        // Impede arrastar imagens (Reforço JS)
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', e => e.preventDefault());
+        });
+    </script>
+
+</body>
+</html>
